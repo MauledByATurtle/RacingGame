@@ -1,36 +1,85 @@
+"""
+This is the start of a racing game!
+
+TODO:
+    - Menu
+
+- KENT 'TURTLE' NEX
+- Last Updated - March 2nd, 2015
+"""
+
+##############################
+#          IMPORTS           #
+##############################
+
 import pygame
+import keyboard_mouse_Class
+import global_Module
+import menu_Class
 from pygame.locals import *
 
+##############################
+#          GLOBALS           #
+##############################
 #Globals
-INT_SIZE = INT_WIDTH, INT_HEIGHT = (1280,720)  # This is the size of the screen
+INT_SIZE = INT_WIDTH, INT_HEIGHT = global_Module.screen_size  # This is the size of the screen
 FPS = 180  # FPS
 
-# this is the main function of the program
+##############################
+#          FUNCTIONS         #
+##############################
+
+
+
+
+##############################
+#            MAIN            #
+##############################
+# This is the main function of the program
 def main():
 
-    colors = {'white' : pygame.Color(255,255,255),
-              'black' : pygame.Color(0,0,0)}
+    ##############################
+    #     M    VARIABLES         #
+    ##############################
+    # Color
+    colors = global_Module.colors  # Gets the colors from the globals
+    game_loop = True  # Used to stop the game when you want it over
+    menu_dict = {'Start' : (INT_WIDTH / 2, (INT_HEIGHT / 6) * 3),
+                 'Multi-player' : (INT_WIDTH / 2, (INT_HEIGHT / 6) * 4),
+                 'Quit' : (INT_WIDTH / 2 , (INT_HEIGHT / 6) * 5)}
 
+    ##############################
+    #     M       INIT           #
+    ##############################
     pygame.init()  # inits
     fps_clock = pygame.time.Clock()  # sets the framerate clock
     win_screen_obj = pygame.display.set_mode(INT_SIZE)  # sets the display
-    pygame.display.set_caption('Level Creator')  # sets the caption for the display
+    pygame.display.set_caption('Racing Game')  # sets the caption for the display
+    userKeyboard = keyboard_mouse_Class.Keyboard()
+    main_menu = menu_Class.Menu(win_screen_obj, fps_clock, menu_dict, "ULTIMATE RACING BUTLER SIMULATOR 2015")
 
-    while True:  # Game loop
+    ##############################
+    #    M    MENU LOOP          #
+    ##############################
 
-        for event in pygame.event.get():  # Checks all the events to see if anything is happening
-            if event.type == QUIT:  # If you close it then type QUIT happens
-                raise SystemExit, 'CLOSED'
-            if event.type == KEYDOWN:  # Any keys that are pressed
-                if event.key == K_ESCAPE:  # Closes it if you press escape
-                    raise SystemExit, 'ESCAPE'
+    main_menu.main()
 
+    ##############################
+    #     M    MAIN LOOP         #
+    ##############################
+    while game_loop:  # Game loop
 
+        # Fetch info
+        keys = userKeyboard.update()
+
+        # Updates
         win_screen_obj.fill(colors['white'])  # sets the screen color to white
         fps_clock.tick(FPS)  # This sets the block at the fps
         pygame.display.update()  # This updates the screen
 
-
+##############################
+#            START           #
+##############################
 
 # if the program is launched by itself then it runs main
 if __name__ == '__main__':
