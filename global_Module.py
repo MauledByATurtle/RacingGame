@@ -5,6 +5,7 @@ colors = {'black' : (0,0,0),  # This is all the colors
           'gray' : (128,128,128),
           'red' : (255,0,0),
           'blue' : (0,0,255),
+          'light_grey' : (170,170,170),
           'green' : (0,255,0)}
 
 screen_size = (1280, 720)

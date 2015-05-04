@@ -16,6 +16,7 @@ import pygame
 import keyboard_mouse_Class
 import global_Module
 import menu_Class
+import car_Class
 from pygame.locals import *
 
 ##############################
@@ -55,14 +56,18 @@ def main():
     fps_clock = pygame.time.Clock()  # sets the framerate clock
     win_screen_obj = pygame.display.set_mode(INT_SIZE)  # sets the display
     pygame.display.set_caption('Racing Game')  # sets the caption for the display
-    userKeyboard = keyboard_mouse_Class.Keyboard()
+    userKeyboard = keyboard_mouse_Class.Keyboard()  # All keyboard and mouse are handled by this
     main_menu = menu_Class.Menu(win_screen_obj, fps_clock, menu_dict, "ULTIMATE RACING BUTLER SIMULATOR 2015")
 
+    player_sprite_group = pygame.sprite.Group()
+    player_car = car_Class.Car()
+    player_sprite_group.add(player_car)
+
     ##############################
-    #    M    MENU LOOP          #
+    #    M    MENU CLASS         #
     ##############################
 
-    main_menu.main()
+    #main_menu.main()
 
     ##############################
     #     M    MAIN LOOP         #
@@ -70,10 +75,14 @@ def main():
     while game_loop:  # Game loop
 
         # Fetch info
-        keys = userKeyboard.update()
+        keys = userKeyboard.update()  # Fetches keyboard and mouse inputs
 
         # Updates
         win_screen_obj.fill(colors['white'])  # sets the screen color to white
+
+        player_sprite_group.draw(win_screen_obj)
+        player_sprite_group.update(keys)
+
         fps_clock.tick(FPS)  # This sets the block at the fps
         pygame.display.update()  # This updates the screen
 
