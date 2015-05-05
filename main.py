@@ -2,10 +2,10 @@
 This is the start of a racing game!
 
 TODO:
-    - Menu
+    - Driving
 
 - KENT 'TURTLE' NEX
-- Last Updated - March 2nd, 2015
+- Last Updated - March 4nd, 2015
 """
 
 ##############################
@@ -67,7 +67,7 @@ def main():
     #    M    MENU CLASS         #
     ##############################
 
-    #main_menu.main()
+    main_menu.main()
 
     ##############################
     #     M    MAIN LOOP         #
