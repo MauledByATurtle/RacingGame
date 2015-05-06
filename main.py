@@ -67,7 +67,7 @@ def main():
     #    M    MENU CLASS         #
     ##############################
 
-    main_menu.main()
+    #main_menu.main()
 
     ##############################
     #     M    MAIN LOOP         #
@@ -81,7 +81,7 @@ def main():
         win_screen_obj.fill(colors['white'])  # sets the screen color to white
 
         player_sprite_group.draw(win_screen_obj)
-        player_sprite_group.update(keys)
+        player_sprite_group.update(keys, win_screen_obj)
 
         fps_clock.tick(FPS)  # This sets the block at the fps
         pygame.display.update()  # This updates the screen
