@@ -40,6 +40,7 @@ class Car(pygame.sprite.Sprite):  # This class will handle everything that the c
     def update(self, keys, surface):  # This is the main update function
         self.keys_dict = keys  # Gets the keys from the main.py
 
+        self.debug = str(self.velocity)
         font_render = self.font.render(self.debug, 1, pygame.Color(0,0,0))
 
         if self.keys_dict['R']:

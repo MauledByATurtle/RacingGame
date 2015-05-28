@@ -2,7 +2,8 @@
 This is the start of a racing game!
 
 TODO:
-    - Driving
+    - Multiplayer
+    - Road
 
 - KENT 'TURTLE' NEX
 - Last Updated - March 4nd, 2015
@@ -17,6 +18,7 @@ import keyboard_mouse_Class
 import global_Module
 import menu_Class
 import car_Class
+import wall
 from pygame.locals import *
 
 ##############################
@@ -63,6 +65,8 @@ def main():
     player_car = car_Class.Car()
     player_sprite_group.add(player_car)
 
+    wall_sprite_group = pygame.sprite.Group()
+
     ##############################
     #    M    MENU CLASS         #
     ##############################
@@ -77,11 +81,18 @@ def main():
         # Fetch info
         keys = userKeyboard.update()  # Fetches keyboard and mouse inputs
 
+        if keys['K']:
+            rand_wall = wall.wall()
+            wall_sprite_group.add(rand_wall)
+            keys['K'] = False
+
         # Updates
         win_screen_obj.fill(colors['white'])  # sets the screen color to white
 
         player_sprite_group.draw(win_screen_obj)
         player_sprite_group.update(keys, win_screen_obj)
+
+        wall_sprite_group.draw(win_screen_obj)
 
         fps_clock.tick(FPS)  # This sets the block at the fps
         pygame.display.update()  # This updates the screen
